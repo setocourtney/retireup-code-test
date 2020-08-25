@@ -25,8 +25,8 @@ const Home = () => {
     const [ annualReturns, setAnnualReturns ] = useState([]);
     const [ cumulativeVals, setCumulativeVals] = useState({});
     const [ sliderRange, setSliderRange ] = useState([0,0]);
-    const [ dataStartYear, setDataStartYear ] = useState(0);
-    const [ dataEndYear, setDataEndYear ] = useState(0);;
+    const [ dataStartYear, setDataStartYear ] = useState(1926);
+    const [ dataEndYear, setDataEndYear ] = useState(2019);
 
     useEffect(()=>{
         // make initial api call to get all returns data
@@ -37,7 +37,7 @@ const Home = () => {
                 setCumulativeVals(calculateCumulative(res.data));
                 setDataStartYear(res.data[0].year); // set start year of data set - used to determine relative index of values and set slider min
                 setDataEndYear(res.data[res.data.length - 1].year); // set end year of data set - set slider max
-                setSliderRange([res.data[0].year, res.data[res.data.length - 1].year]);
+                setSliderRange([res.data[0].year, res.data[res.data.length - 1].year]); // initilize range
             })
             .catch(err => console.log(err));
         }
@@ -51,9 +51,8 @@ const Home = () => {
                     <div className="year-slider">
                         <Range 
                             min={dataStartYear} 
-                            max={dataEndYear} 
-                            defaultValue={[dataStartYear, dataEndYear]} 
-                            allowCross={false} 
+                            max={dataEndYear}
+                            defaultValue={[dataStartYear, dataEndYear]}
                             onChange={(value) => setSliderRange(value)}
                         />
                     </div>
@@ -71,8 +70,10 @@ const Home = () => {
                             ? annualReturns.map((data, index) => {
                                 // initialize starting point for cumulative calculation
                                 const startVal = sliderRange[0] === dataStartYear ? parseFloat(annualReturns[0].totalReturn) : cumulativeVals[sliderRange[0]] - cumulativeVals[sliderRange[0] - 1];
+                                
+                                // display table data for values with returns data array index between the indices of range start and end
                                 if (index >= sliderRange[0] - dataStartYear && index <= sliderRange[1] - dataStartYear) {
-                                    // display table data for values with returns data array index between the indices of range start and end
+                                    
                                     // cummulative value is relative to cummulative value of range start
                                     return (
                                         <tr key={ data.year }>
