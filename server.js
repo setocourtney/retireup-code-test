@@ -22,7 +22,7 @@ app.use(cors());
 
 
 // Initialize MongoDb connection
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/shareish", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/sp500", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Define API routes here
 app.use(routes);

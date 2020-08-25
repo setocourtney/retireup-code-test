@@ -1,0 +1,40 @@
+{
+  "name": "sp500-returns",
+  "version": "1.0.0",
+  "description": "MERN app for displaying cummulative annual returns for S&P500 Index Fund",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "seed": "node scripts/seed.js"
+  },
+  "author": "setocourtney",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.7"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel": "^6.23.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "materialize-css": "^1.0.0-rc.2",
+    "mongoose": "^5.9.14",
+    "rc-slider": "^9.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/setocourtney/retireup-code-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/setocourtney/retireup-code-test/issues"
+  },
+  "homepage": "https://github.com/setocourtney/retireup-code-test#readme"
+}
