@@ -8,7 +8,7 @@ React App with Node/Express/MongoDB backend that displays S&amp;P 500 index retu
 
 1. Install dependencies
 ```
-npm install
+npm install && npm run seed
 ```
 
 2. Start App
