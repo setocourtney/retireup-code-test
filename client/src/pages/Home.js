@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Table } from 'react-bootstrap';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import RangeSlider from '../components/RangeSlider';
 import { getReturns } from '../utils/API';
-
-// helper funciont to calculate cumulative return for each year based on start of data set
-// assign cumulative values to obj[year] for efficient data access
-const calculateCumulative = (returns) => {
-    let cumulativeObj = []
-    let cumulativeVal = 0;
-    for (let i = 0; i < returns.length; i++) {
-        let currentEl = returns[i];
-        cumulativeVal = cumulativeVal + parseFloat(currentEl.totalReturn);
-        cumulativeObj[currentEl.year] = cumulativeVal;
-    }
-    return cumulativeObj;
-}
-
-// initialize slider
-const { createSliderWithTooltip } = Slider;
-const Range = createSliderWithTooltip(Slider.Range);
+import calculateCumulative from '../utils/functions/calculateCumulative';
 
 const Home = () => {
     const [ annualReturns, setAnnualReturns ] = useState([]);
@@ -49,7 +32,7 @@ const Home = () => {
                 <Container>
                     <h3 className="text-center">S&P 500 Annual Returns</h3>
                     <div className="year-slider">
-                        <Range 
+                        <RangeSlider
                             min={dataStartYear} 
                             max={dataEndYear}
                             defaultValue={[dataStartYear, dataEndYear]}
