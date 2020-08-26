@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const db = require('../models/');
 const sp500Data = require('./sp500_returnData.js');
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://admin:dj7yI5qyeJrwSMtW@sp500-returns.iuczw.mongodb.net/sp500?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/sp500", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const seeds = sp500Data;
 
